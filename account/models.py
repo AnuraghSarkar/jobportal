@@ -1,3 +1,4 @@
+from statistics import mode
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -24,9 +25,12 @@ class User(AbstractUser):
                                   'unique': "A user with that email already exists.",
                               })
     role = models.CharField(choices=ROLE,  max_length=10)
+    phone = models.CharField(max_length=10, blank=False, unique=True, null=False, error_messages={
+                                  'unique': "A user with that phone already exists.",
+                              })
     gender = models.CharField(choices=JOB_TYPE, max_length=1)
 
-    resume = models.FileField(upload_to='media', null=True, blank=True, verbose_name='Resume', validators=[validate_file_extension])
+    # resume = models.FileField(upload_to='media', null=True, blank=True, verbose_name='Resume', validators=[validate_file_extension])
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 

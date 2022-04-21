@@ -16,7 +16,7 @@ class EmployeeRegistrationForm(UserCreationForm):
         self.fields['password1'].label = "Password :"
         self.fields['password2'].label = "Confirm Password :"
         self.fields['email'].label = "Email :"
-        # self.fields['resume'].label = "Resume :"
+        self.fields['phone'].label = "Phone :"
         self.fields['gender'].label = "Gender :"
 
         self.fields['first_name'].widget.attrs.update(
@@ -44,6 +44,11 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+        self.fields['phone'].widget.attrs.update(
+            {
+                'placeholder': 'Your Phone Number',
+            }
+        )
 
         
 
@@ -51,7 +56,7 @@ class EmployeeRegistrationForm(UserCreationForm):
 
         model=User
 
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'gender']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2','phone' ,'gender']
 
     def clean_gender(self):
         gender = self.cleaned_data.get('gender')
@@ -76,6 +81,7 @@ class EmployerRegistrationForm(UserCreationForm):
         self.fields['last_name'].label = "Company Address"
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Confirm Password"
+        self.fields['phone'].label = "Company Phone"
 
         self.fields['first_name'].widget.attrs.update(
             {
@@ -102,11 +108,16 @@ class EmployerRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+        self.fields['phone'].widget.attrs.update(
+            {
+                'placeholder': 'Company Number',
+            }
+        )
     class Meta:
 
         model=User
 
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2',]
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'phone']
 
 
     def save(self, commit=True):
@@ -165,6 +176,18 @@ class EmployeeProfileEditForm(forms.ModelForm):
             }
         )
 
+        self.fields['email'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Your Email',
+            }
+        )
+
+        self.fields['phone'].widget.attrs.update(
+            {
+                'placeholder': 'Enter Your Number',
+            }
+        )
+
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "gender"]
+        fields = ["first_name", "last_name", "gender","email","phone"]
