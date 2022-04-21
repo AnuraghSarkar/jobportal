@@ -16,6 +16,7 @@ class EmployeeRegistrationForm(UserCreationForm):
         self.fields['password1'].label = "Password :"
         self.fields['password2'].label = "Confirm Password :"
         self.fields['email'].label = "Email :"
+        # self.fields['resume'].label = "Resume :"
         self.fields['gender'].label = "Gender :"
 
         self.fields['first_name'].widget.attrs.update(
@@ -43,6 +44,8 @@ class EmployeeRegistrationForm(UserCreationForm):
                 'placeholder': 'Confirm Password',
             }
         )
+
+        
 
     class Meta:
 
